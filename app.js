@@ -62,9 +62,18 @@ app.post('/compile', function(req, res) {
   //   dependencies: get_build_dependencies(params[:input])
   // }.to_json.to_s
 
+
+  var css = '';
+
+  try {
+    css = sass_compile(req.body.input, req.body.output_style)
+  }
+  catch(e) {
+    css = e.toString();
+  }
   
   res.json({
-    css: sass_compile(req.body.input, req.body.output_style),
+    css: css,
     dependencies: {}
   });
   

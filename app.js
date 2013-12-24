@@ -97,10 +97,16 @@ app.set('view engine', 'ejs'); // replace with whatever template language you de
 app.use(express.static('public'));
 app.use(express.bodyParser());
 
-// app.all('*', function(req, res) {
-//   res.set('Access-Control-Allow-Origin', 'http://sassmeister.dev');
-//   next();
-// });
+
+
+
+app.all('*', function(req, res, next) {
+  if(req.get('origin').match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|([\d+\.]{4}xip\.io))/)) {
+    res.set('Access-Control-Allow-Origin', req.get('origin'));
+  }
+
+  next();
+});
 
 
 // Set up site routes
@@ -111,9 +117,6 @@ app.get('/', function(req, res) {
 
 
 app.post('/compile', function(req, res) {
-  res.set('Access-Control-Allow-Origin', 'http://sassmeister.dev');
-
-
   var css = '';
 
   try {
@@ -133,9 +136,6 @@ app.post('/compile', function(req, res) {
 
 
 app.get('/extensions', function(reg, res) {
-  res.set('Access-Control-Allow-Origin', 'http://sassmeister.dev');
-
-
   res.send('<div id="extension_list"></div>');
 });
 

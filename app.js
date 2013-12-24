@@ -125,7 +125,9 @@ app.post('/compile', function(req, res) {
   
   res.json({
     css: css,
-    dependencies: {}
+    dependencies: {
+      'libsass': '0.7.0'
+    }
   });
 });
 

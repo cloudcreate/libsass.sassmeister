@@ -29,8 +29,6 @@ var nodeSass = require('node-sass');
 //     end
 //   end
 
-
-
 var sass_compile = function(sass, output_style) {
   return nodeSass.renderSync({
     data: sass,
@@ -38,12 +36,71 @@ var sass_compile = function(sass, output_style) {
   });
 };
 
+
+
+// def unpack_dependencies(sass)
+//   frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
+// 
+//   if frontmatter.nil?
+//     frontmatter = sass.scan(/^\/\/ ([\w\s]+?) [\(\)v[:alnum:]\.]+?\s*$/).first
+//   else
+//     frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
+//   end
+// 
+//   frontmatter.delete_if do |x|
+//     ! plugins.key?(x.to_s.strip)
+//   end
+// 
+//   if frontmatter.empty?
+//     return nil
+//   else
+//     imports = []
+// 
+//     plugins[frontmatter.first.strip][:import].each do |import|
+//       imports << "@import \"#{import}\""
+//     end
+// 
+//     return imports
+//   end
+// end
+
+
+// def require_plugins(sass)
+//   get_imports_from_sass(sass) { |name, plugin| require plugin[:gem] }
+// 
+//   Compass.sass_engine_options[:load_paths].each do |path|
+//     Sass.load_paths << path
+//   end
+// end
+
+
+// def get_imports_from_sass(sass)
+//   imports = sass.scan(/^\s*@import[\s\"\']*(.+?)[\"\';]*$/)
+//   imports.map! {|i| i.first}
+// 
+//   plugins.each do |key, plugin|
+//     if ! imports.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/).empty?
+//       yield key, plugin if block_given?
+//     end
+//   end
+// end
+
+
+
+
+
+
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); // replace with whatever template language you desire
 // instruct express to server up static assets
 app.use(express.static('public'));
 app.use(express.bodyParser());
+
+// app.all('*', function(req, res) {
+//   res.set('Access-Control-Allow-Origin', 'http://sassmeister.dev');
+//   next();
+// });
 
 
 // Set up site routes
@@ -54,13 +111,7 @@ app.get('/', function(req, res) {
 
 
 app.post('/compile', function(req, res) {
-  // RUBY CODE:
-  // content_type 'application/json'
-  //
-  // {
-  //   css: sass_compile(params[:input], params[:syntax], params[:output_style]),
-  //   dependencies: get_build_dependencies(params[:input])
-  // }.to_json.to_s
+  res.set('Access-Control-Allow-Origin', 'http://sassmeister.dev');
 
 
   var css = '';
@@ -76,12 +127,15 @@ app.post('/compile', function(req, res) {
     css: css,
     dependencies: {}
   });
-  
-  
-  //  console.log(req.body.input);
-  
 });
 
+
+app.get('/extensions', function(reg, res) {
+  res.set('Access-Control-Allow-Origin', 'http://sassmeister.dev');
+
+
+  res.send('<div id="extension_list"></div>');
+});
 
 // With the express server and routes defined, we can start to listen
 // for requests. Heroku defines the port in an environment variable.

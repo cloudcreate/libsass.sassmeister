@@ -5,6 +5,7 @@ var app = express();
 var path = require('path');
 var nodeSass = require('node-sass');
 
+var sassModules = require('./config/plugins.json');
 
 //   def sass_compile(sass, syntax, output_style)
 //     imports = ''
@@ -101,7 +102,7 @@ app.use(express.bodyParser());
 
 
 app.all('*', function(req, res, next) {
-  if(req.get('origin').match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|([\d+\.]{4}xip\.io))/)) {
+  if(req.get('origin') && req.get('origin').match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|([\d+\.]{4}xip\.io))/)) {
     res.set('Access-Control-Allow-Origin', req.get('origin'));
   }
 

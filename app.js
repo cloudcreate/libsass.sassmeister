@@ -47,18 +47,15 @@ var extractImports = function(sass) {
 };
 
 var setIncludePaths = function(imports) {
-  var paths = [];
+  var paths = ["sass_modules/"];
 
   for(i = 0; i < imports.length; i++) {
     for(var module in sassModules) {
       if(imports[i].match(sassModules[module].fingerprint)) {
-        for(path in sassModules[module].imports) {
-          paths.push("sass_modules/" + path + "/");
+        for(path in sassModules[module].paths) {
+          paths.push("sass_modules/" + sassModules[module].paths[path] + "/");
         }
       }
-      else {
-        paths.push("sass_modules/");
-      } 
     }
   }
 
@@ -104,16 +101,6 @@ var sassCompile = function(sass, outputStyle) {
 //     return imports
 //   end
 // end
-
-
-// def require_plugins(sass)
-//   get_imports_from_sass(sass) { |name, plugin| require plugin[:gem] }
-// 
-//   Compass.sass_engine_options[:load_paths].each do |path|
-//     Sass.load_paths << path
-//   end
-// end
-
 
 
 

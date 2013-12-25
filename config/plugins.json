@@ -18,7 +18,7 @@
     "url": "http://bourbon.io/"
   },
   "Modular Scale": {
-    "fingerprint": "/modular-scale/g",
+    "fingerprint": "modular-scale",
     "imports": [
       "modular-scale"
     ],

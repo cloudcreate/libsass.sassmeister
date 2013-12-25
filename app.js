@@ -30,6 +30,22 @@ var sassModules = require('./config/plugins.json');
 //     end
 //   end
 
+
+var extract_imports = function(sass) {
+  var imports = [],
+      regex = /@import\s*[("']*([^;]+)[;)"']*/g;
+
+  while ((result = regex.exec(sass)) !== null ) {
+    var subash = result[1].replace(/"|'/gi, "").split(",");
+
+    for(i = 0; i < subash.length; i++) {
+      imports.push(subash[i].trim());
+    }
+  }
+
+  return imports;
+};
+
 var sass_compile = function(sass, output_style) {
   return nodeSass.renderSync({
     data: sass,
@@ -73,20 +89,6 @@ var sass_compile = function(sass, output_style) {
 //     Sass.load_paths << path
 //   end
 // end
-
-
-// def get_imports_from_sass(sass)
-//   imports = sass.scan(/^\s*@import[\s\"\']*(.+?)[\"\';]*$/)
-//   imports.map! {|i| i.first}
-// 
-//   plugins.each do |key, plugin|
-//     if ! imports.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/).empty?
-//       yield key, plugin if block_given?
-//     end
-//   end
-// end
-
-
 
 
 

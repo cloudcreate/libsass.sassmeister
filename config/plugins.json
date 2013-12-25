@@ -1,6 +1,6 @@
 {
   "Bitters": {
-    "fingerprint": "(bitters|bitters/*)",
+    "fingerprint": "/(bitters|bitters/*)/g",
     "imports": [
       "bourbon/bourbon",
       "neat/neat",
@@ -10,7 +10,7 @@
     "url": "http://bitters.bourbon.io"
   },
   "Bourbon": {
-    "fingerprint": "(bourbon|bourbon/*)",
+    "fingerprint": "/(bourbon|bourbon/*)/g",
     "imports": [
       "bourbon/bourbon"
     ],
@@ -18,7 +18,7 @@
     "url": "http://bourbon.io/"
   },
   "Modular Scale": {
-    "fingerprint": "modular-scale",
+    "fingerprint": "/modular-scale/g",
     "imports": [
       "modular-scale"
     ],
@@ -28,7 +28,7 @@
     "url": "https://github.com/Team-Sass/modular-scale"
   },
   "Neat": {
-    "fingerprint": "(neat|neat/*)",
+    "fingerprint": "/(neat|neat/*)/g",
     "imports": [
       "bourbon/bourbon",
       "neat/neat"

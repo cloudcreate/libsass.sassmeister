@@ -31,25 +31,49 @@ var sassModules = require('./config/plugins.json');
 //   end
 
 
-var extract_imports = function(sass) {
+var extractImports = function(sass) {
   var imports = [],
       regex = /@import\s*[("']*([^;]+)[;)"']*/g;
 
   while ((result = regex.exec(sass)) !== null ) {
-    var subash = result[1].replace(/"|'/gi, "").split(",");
+    var x = result[1].replace(/"|'/gi, "").split(",");
 
-    for(i = 0; i < subash.length; i++) {
-      imports.push(subash[i].trim());
+    for(i = 0; i < x.length; i++) {
+      imports.push(x[i].trim());
     }
   }
 
   return imports;
 };
 
-var sass_compile = function(sass, output_style) {
+var setIncludePaths = function(imports) {
+  var paths = [];
+
+  for(i = 0; i < imports.length; i++) {
+    for(var module in sassModules) {
+      if(imports[i].match(sassModules[module].fingerprint)) {
+        for(path in sassModules[module].imports) {
+          paths.push("sass_modules/" + path + "/");
+        }
+      }
+      else {
+        paths.push("sass_modules/");
+      } 
+    }
+  }
+
+  paths= paths.filter(function (v, i, a) { return a.indexOf (v) == i }); // dedupe array
+
+  return paths;  
+};
+
+var sassCompile = function(sass, outputStyle) {
+  var includePaths = setIncludePaths(extractImports(sass));
+
   return nodeSass.renderSync({
     data: sass,
-    outputStyle: output_style
+    outputStyle: outputStyle,
+    includePaths: includePaths
   });
 };
 
@@ -123,7 +147,7 @@ app.post('/compile', function(req, res) {
   var css = '';
 
   try {
-    css = sass_compile(req.body.input, req.body.output_style)
+    css = sassCompile(req.body.input, req.body.output_style)
   }
   catch(e) {
     css = e.toString();

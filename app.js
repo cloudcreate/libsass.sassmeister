@@ -7,29 +7,6 @@ var nodeSass = require('node-sass');
 
 var sassModules = require('./config/plugins.json');
 
-//   def sass_compile(sass, syntax, output_style)
-//     imports = ''
-//
-//     if ! sass.match(/^\/\/ ----\n/) && sass.match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
-//       imports = unpack_dependencies(sass)
-//       imports = imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" if ! imports.nil?
-//     end
-//
-//     sass.slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
-//
-//     sass = imports + sass if ! imports.nil?
-//
-//     require_plugins(sass)
-//
-//     begin
-//       send("#{syntax}".to_sym, sass.chomp, {:style => :"#{output_style}", :quiet => true})
-//
-//     rescue Sass::SyntaxError => e
-//       status 200
-//       e.to_s
-//     end
-//   end
-
 
 var extractImports = function(sass) {
   var imports = [],
@@ -79,34 +56,6 @@ var sassCompile = function(sass, outputStyle) {
 
 
 
-// def unpack_dependencies(sass)
-//   frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
-// 
-//   if frontmatter.nil?
-//     frontmatter = sass.scan(/^\/\/ ([\w\s]+?) [\(\)v[:alnum:]\.]+?\s*$/).first
-//   else
-//     frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
-//   end
-// 
-//   frontmatter.delete_if do |x|
-//     ! plugins.key?(x.to_s.strip)
-//   end
-// 
-//   if frontmatter.empty?
-//     return nil
-//   else
-//     imports = []
-// 
-//     plugins[frontmatter.first.strip][:import].each do |import|
-//       imports << "@import \"#{import}\""
-//     end
-// 
-//     return imports
-//   end
-// end
-
-
-
 // views as directory for all template files
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); // replace with whatever template language you desire
@@ -152,7 +101,7 @@ app.post('/compile', function(req, res) {
 
 
 app.get('/extensions', function(reg, res) {
-  res.send('<div id="extension_list"></div>');
+  res.render('extensions', {extensions: sassModules});
 });
 
 // With the express server and routes defined, we can start to listen

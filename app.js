@@ -48,10 +48,13 @@ var extractImports = function(sass) {
 
 var setIncludePaths = function(imports) {
   var paths = ["sass_modules/"];
+  var fingerprint;
 
   for(i = 0; i < imports.length; i++) {
     for(var module in sassModules) {
-      if(imports[i].match(sassModules[module].fingerprint)) {
+      fingerprint = new RegExp(sassModules[module].fingerprint, "gi");
+
+      if(imports[i].match(fingerprint)) {
         for(path in sassModules[module].paths) {
           paths.push("sass_modules/" + sassModules[module].paths[path] + "/");
         }
@@ -110,7 +113,6 @@ app.set('view engine', 'ejs'); // replace with whatever template language you de
 // instruct express to server up static assets
 app.use(express.static('public'));
 app.use(express.bodyParser());
-
 
 
 

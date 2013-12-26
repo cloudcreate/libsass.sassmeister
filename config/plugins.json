@@ -17,6 +17,16 @@
     "paths": [],
     "url": "http://bourbon.io/"
   },
+  "Foundation": {
+    "fingerprint": "(foundation|foundation\/.*)",
+    "imports": [
+      "foundation"
+    ],
+    "paths": [
+      "foundation/scss"
+    ],
+    "url": "http://foundation.zurb.com/"
+  },
   "Modular Scale": {
     "fingerprint": "modular-scale",
     "imports": [

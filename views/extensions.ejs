@@ -1,15 +1,10 @@
 <div id="extension_list">
-  <span class="selected">Extensions</span>
-  <ul>
-    <li>
-      <ol>
-      <% for(extension in extensions) { %>
-        <li><a data-import="<%= extensions[extension].imports %>"><%= extension %></a><% //&nbsp;&nbsp;(v1.4) %></li>
-      <% } %>
-      </ol>
-      
-      <i>(Will be inserted at cursor)</i>
-    </li>
-  </ul>
+  <h3 class="selected">Extensions <i>(Inserted at cursor)</i></h3>
+
+  <ol>
+  <% for(extension in extensions) { %>
+    <li><a data-import="<%= extensions[extension].imports %>"><%= extension %></a><% //&nbsp;&nbsp;(v1.4) %></li>
+  <% } %>
+  </ol>
 </div>
 

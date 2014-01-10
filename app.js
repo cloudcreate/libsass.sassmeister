@@ -1,3 +1,5 @@
+require('newrelic');
+
 // set variables for environment
 var express = require('express');
 var app = express();

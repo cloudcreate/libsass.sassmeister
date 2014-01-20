@@ -85,18 +85,23 @@ app.get('/', function(req, res) {
 app.post('/compile', function(req, res) {
   var css = '';
 
+  var time = new Date;
+
   try {
     css = sassCompile(req.body.input, req.body.output_style)
   }
   catch(e) {
     css = e.toString();
   }
-  
+
+  time = (new Date - time) / 1000;
+
   res.json({
     css: css,
     dependencies: {
       'libsass': '0.7.0'
-    }
+    },
+    time: time //.run().times.elapsed
   });
 });
 

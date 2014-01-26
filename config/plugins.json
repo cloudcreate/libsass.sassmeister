@@ -45,5 +45,15 @@
     ],
     "paths": [],
     "url": "http://neat.bourbon.io"
+  },
+  "Sass List–Maps": {
+    "fingerprint": "sass-list-maps",
+    "imports": [
+      "sass-list-maps"
+    ],
+    "paths": [
+      "sass-list-maps"
+    ],
+    "url": "https://github.com/lunelson/sass-list-maps"
   }
 }

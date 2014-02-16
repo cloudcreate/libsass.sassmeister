@@ -27,6 +27,16 @@
     ],
     "url": "http://foundation.zurb.com/"
   },
+  "Garnish": {
+    "fingerprint": "garnish",
+    "imports": [
+      "garnish"
+    ],
+    "paths": [
+      "garnish/src"
+    ],
+    "url": "https://github.com/paulozoom/garnish"
+  },
   "Modular Scale": {
     "fingerprint": "modular-scale",
     "imports": [

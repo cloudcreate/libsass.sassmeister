@@ -1,1 +1,6 @@
 newrelic_agent.log
+sass_modules/fastclick
+sass_modules/lodash
+sass_modules/jquery*
+sass_modules/modernizr
+sass_modules/sizzle

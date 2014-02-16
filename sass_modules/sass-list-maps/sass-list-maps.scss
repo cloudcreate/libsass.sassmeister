@@ -1,12 +1,10 @@
-// list helper functions (some from SassyLists)
+// list helper functions
+// 0.9.3 -- "list()" now deprecated in favor of "zip()".
 
 @function list($args...) {
 	$output: ();
 	@each $arg in $args { $output: append($output, $arg); }
 	@return $output;
-}
-@function unlist($list) {
-	@return if(length($list) == 1, nth($list, 1), $list);
 }
 @function slice($list, $start: 1, $end: length($list), $sep: 'comma') {
 	$output: ();
@@ -14,18 +12,22 @@
 		$output: append($output, nth($list, $i), $sep); }
 	@return $output;
 }
-@function replace-nth($list, $value, $index, $sep: 'comma') {
-	$output: ();
-	@for $i from 1 through length($list) {
-		@if $i == $index { $output: append($output, $value, $sep); }
-		@else { $output: append($output, nth($list, $i), $sep); } }
+@function set-nth($list, $index, $value, $sep: 'comma') {
+	$length: length($list); $output: ();
+	@if $index > $length or $index <= 0 { @return $list; }
+	@for $i from 1 through $index - 1 { $output: append($output, nth($list, $i), $sep); }
+	$output: append($output, $value, $sep);
+	@for $i from $index + 1 through $length { $output: append($output, nth($list, $i), $sep); }
 	@return $output;
 }
 
-// list-map helper functions, purely semantic
+// list-map helper functions
+// 0.9.3 -- key() and value() tentatively added as alternatives to 'tuple-' named funcs
 
 @function tuple-key($tuple) { @return nth($tuple, 1); }
 @function tuple-value($tuple) { @return nth($tuple, 2); }
+@function key($tuple) { @return nth($tuple, 1); }
+@function value($tuple) { @return nth($tuple, 2); }
 
 // list-map versions of map-keys(), -values() and -has-key() functions
 
@@ -56,7 +58,7 @@
 	$keys1: map-keys($list1);
 	@each $tuple in $list2 {
 		$index: index($keys1, tuple-key($tuple));
-		@if $index { $list1: replace-nth($list1, $tuple, $index); }
+		@if $index { $list1: set-nth($list1, $index, $tuple); }
 		@else { $list1: append($list1, $tuple, 'comma'); } }
 	@return $list1;
 }
@@ -67,7 +69,7 @@
 	@return $out;
 }
 
-// advanced: map-get-z() and map-merge-z()
+// deep/nested map functions: map-get-z() and map-merge-z()
 
 @function map-get-z($list, $keys...) {
 	@each $key in $keys {
@@ -79,12 +81,19 @@
 	$arg-length: length($keys-and-value);
 	$value: nth($keys-and-value, $arg-length);
 	$key-length: $arg-length - 1;
-	@if $key-length == 0 { $value: if(type-of($value) == 'list', map-merge($list, $value), map-merge($list, list($value ()))); }
+	@if $key-length == 0 { $value: if(type-of($value) == 'list', map-merge($list, $value), map-merge($list, zip($value, ()))); }
 	@else { $start: if(type-of($value) == 'list', 0, 1);
 		@for $i from $start through $key-length {
 			$new-list: (); $old-list: ();
-			@if $i == 0 { $new-list: $value; } @else { $new-list: list(nth($keys-and-value, $key-length + 1 - $i) $value); }
+			@if $i == 0 { $new-list: $value; } @else { $new-list: zip(nth($keys-and-value, $key-length + 1 - $i), $value); }
 			@if $i == $key-length { $old-list: $list; } @else { $old-list: map-get-z($list, slice($keys-and-value, 1, $key-length - $i)...) or (); }
 			$value: map-merge($old-list, $new-list); } }
 	@return $value;
 }
+
+// 0.9.2 -- aliases
+// these replace map-*() and map-*-z() variants with a single universal function
+
+@function get($args...) { @return map-get-z($args...); }
+@function merge($args...) { @return map-merge-z($args...); }
+@function set($args...) { @return map-merge-z($args...); }

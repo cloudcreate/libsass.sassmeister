@@ -37,6 +37,16 @@
     ],
     "url": "https://github.com/paulozoom/garnish"
   },
+  "Guff": {
+    "fingerprint": "guff",
+    "imports": [
+      "guff"
+    ],
+    "paths": [
+      "guff"
+    ],
+    "url": "https://github.com/kenwheeler/guff/"
+  },
   "Modular Scale": {
     "fingerprint": "modular-scale",
     "imports": [

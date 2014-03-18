@@ -1,12 +1,12 @@
 {
   "name": "sass-list-maps",
-  "version": "0.9.3",
+  "version": "0.9.8",
   "homepage": "https://github.com/lunelson/sass-list-maps",
   "authors": [
     "Lu Nelson <lunelson@gmail.com>"
   ],
   "description": "Forward-compatible map functionality for libsass and ruby-sass 3.2.x",
-  "main": "sass-list-maps.scss",
+  "main": "_sass-list-maps.scss",
   "keywords": [
     "libsass",
     "sass",
@@ -26,13 +26,14 @@
     "node_modules",
     "bower_components",
     "test*",
-    "sass-hash.jpg"
+    "sass-hash.jpg",
+    "sass-list-maps.todo"
   ],
-  "_release": "0.9.3",
+  "_release": "0.9.8",
   "_resolution": {
     "type": "version",
-    "tag": "v0.9.3",
-    "commit": "8061e337868b07f707cf2f5f759fa76be3363193"
+    "tag": "v0.9.8",
+    "commit": "be330df495fc06ca7ad2d6e53e0cbe6b2b5bc7f2"
   },
   "_source": "git://github.com/lunelson/sass-list-maps.git",
   "_target": "~0.9.0",

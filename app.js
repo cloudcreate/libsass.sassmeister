@@ -107,7 +107,16 @@ app.post('/compile', function(req, res) {
 
 
 app.get('/extensions', function(reg, res) {
-  res.render('extensions', {extensions: sassModules});
+  var extensions = {}
+
+  for(extension in sassModules) {
+    extensions[extension] = {imports: sassModules[extension].imports}
+  }
+
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(extensions));
+
+  //res.render('extensions', {extensions: sassModules});
 });
 
 // With the express server and routes defined, we can start to listen

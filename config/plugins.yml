@@ -1,0 +1,58 @@
+Bitters:
+  :bower: bitters
+  :import:
+    - bourbon/bourbon
+    - neat/neat
+    - bitters/bitters
+  :fingerprint: (bitters|bitters/.*)
+  :paths: []
+Bourbon:
+  :bower: bourbon
+  :import:
+    - bourbon/bourbon
+  :fingerprint: (bourbon|bourbon/.*)
+  :paths: []
+Foundation:
+  :bower: foundation
+  :fingerprint: (foundation|foundation\/.*)
+  :imports:
+    - foundation
+  :paths:
+    - foundation/scss
+Garnish:
+  :bower: garnish
+  :fingerprint: garnish
+  :imports:
+    - garnish
+  :paths:
+    - garnish/src
+Guff:
+  :bower: guff
+  :fingerprint: guff
+  :imports:
+    - guff
+  :paths:
+    - guff
+Modular Scale:
+  :bower: modular-scale
+  :fingerprint: modular-scale
+  :imports:
+    - modular-scale
+  :paths:
+    - modular-scale/stylesheets
+Neat:
+  :bower: neat
+  :fingerprint: (neat|neat/.*)
+  :imports:
+    - bourbon/bourbon
+    - neat/neat
+  :paths: []
+Sass List–Maps:
+  :bower: sass-list-maps
+  :fingerprint: sass-list-maps
+  :imports:
+    - sass-list-maps
+  :paths:
+    - sass-list-maps
+
+

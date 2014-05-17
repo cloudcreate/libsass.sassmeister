@@ -110,7 +110,7 @@ app.get('/extensions', function(reg, res) {
   var extensions = {}
 
   for(extension in sassModules) {
-    extensions[extension] = {imports: sassModules[extension].imports}
+    extensions[extension] = {import: sassModules[extension].imports}
   }
 
   res.setHeader('Content-Type', 'application/json');

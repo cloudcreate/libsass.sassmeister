@@ -99,7 +99,7 @@ app.post('/compile', function(req, res) {
   res.json({
     css: css,
     dependencies: {
-      'libsass': '0.7.0'
+      'libsass': '0.8.6'
     },
     time: time //.run().times.elapsed
   });

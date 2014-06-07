@@ -4,3 +4,4 @@ sass_modules/lodash
 sass_modules/jquery*
 sass_modules/modernizr
 sass_modules/sizzle
+node_modules/node-sass/media/

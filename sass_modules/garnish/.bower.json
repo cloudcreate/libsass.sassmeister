@@ -16,15 +16,14 @@
     "test",
     "tests"
   ],
-  "version": "0.2.0",
-  "_release": "0.2.0",
+  "version": "0.2.1",
+  "_release": "0.2.1",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.0",
-    "commit": "1d424b0cf5bdd21200636f00744db78b9ddfb611"
+    "tag": "v0.2.1",
+    "commit": "9531059d759ba60b3ff7a109da9303b8574a1377"
   },
   "_source": "git://github.com/paulozoom/garnish.git",
   "_target": "~0.2.0",
-  "_originalSource": "garnish",
-  "_direct": true
+  "_originalSource": "garnish"
 }

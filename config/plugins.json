@@ -47,6 +47,16 @@
     ],
     "url": "https://github.com/kenwheeler/guff/"
   },
+  "MathSass": {
+    "fingerprint": "math",
+    "imports": [
+      "math"
+    ],
+    "paths": [
+      "mathsass/dist"
+    ],
+    "url": "https://github.com/terkel/mathsass"
+  },
   "Modular Scale": {
     "fingerprint": "modular-scale",
     "imports": [

@@ -43,7 +43,7 @@ var setIncludePaths = function(imports) {
 
   paths= paths.filter(function (v, i, a) { return a.indexOf (v) == i }); // dedupe array
 
-  return paths;  
+  return paths;
 };
 
 var sassCompile = function(sass, outputStyle) {
@@ -115,19 +115,25 @@ app.post('/compile', function(req, res) {
 });
 
 
-app.get('/extensions', function(reg, res) {
-  var extensions = {}
+app.get('/extensions', function(req, res) {
+  res.set('Last-Modified', (new Date(APP_LAST_MODIFIED)).toUTCString());
 
-  for(extension in sassModules) {
-    extensions[extension] = {import: sassModules[extension].imports}
+  if(req.fresh) {
+    res.send(304);
+
+  } else {
+    var extensions = {}
+
+    for(extension in sassModules) {
+      extensions[extension] = {import: sassModules[extension].imports}
+    }
+
+    res.set({
+      'Cache-Control': 'public, max-age=2592000',
+      'Content-Type': 'application/json'
+    });
+    res.end(JSON.stringify(extensions));
   }
-
-  res.setHeader('Last-Modified', (new Date(APP_LAST_MODIFIED)).toUTCString());
-  res.setHeader('Cache-Control', 'public, max-age=2592000');
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify(extensions));
-
-  //res.render('extensions', {extensions: sassModules});
 });
 
 // With the express server and routes defined, we can start to listen

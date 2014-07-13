@@ -5,9 +5,10 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var nodeSass = require('node-sass');
-
+var fs = require('fs');
 var sassModules = require('./config/plugins.json');
 
+var APP_LAST_MODIFIED = fs.statSync('./config/plugins.json').mtime;
 
 var extractImports = function(sass) {
   var imports = [],
@@ -121,6 +122,8 @@ app.get('/extensions', function(reg, res) {
     extensions[extension] = {import: sassModules[extension].imports}
   }
 
+  res.setHeader('Last-Modified', (new Date(APP_LAST_MODIFIED)).toUTCString());
+  res.setHeader('Cache-Control', 'public, max-age=2592000');
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(extensions));
 

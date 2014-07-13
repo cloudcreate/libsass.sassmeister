@@ -1,0 +1,22 @@
+{
+  "name": "sass2scss",
+  "main": "dist/sass2scss.min.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {},
+  "homepage": "https://github.com/ArnaudRinquin/sass2scss",
+  "_release": "e77bec7123",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e77bec71237a3bfdf823420c046f972a997dcff4"
+  },
+  "_source": "https://github.com/ArnaudRinquin/sass2scss.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/ArnaudRinquin/sass2scss.git",
+  "_direct": true
+}

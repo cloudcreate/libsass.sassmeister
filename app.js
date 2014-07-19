@@ -86,7 +86,13 @@ if (cluster.isMaster) {
   app.set('view engine', 'ejs'); // replace with whatever template language you desire
   // instruct express to server up static assets
   app.use(express.static('public'));
-  app.use(express.bodyParser());
+  var bodyParser = require('body-parser');
+
+  app.use(bodyParser.urlencoded({ extended: false }));
+
+  app.use(function (req, res, next) {
+    next();
+  });
 
 
   app.all('*', function(req, res, next) {

@@ -95,5 +95,17 @@
       "sass-list-maps"
     ],
     "url": "https://github.com/lunelson/sass-list-maps"
+  },
+  "Sass Color Helpers": {
+    "fingerprint": [
+      "color-helpers"
+    ],
+    "imports": [
+      "color-helpers"
+    ],
+    "paths": [
+      "sass-color-helpers/stylesheets"
+    ],
+    "url": "https://github.com/voxpelli/sass-color-helpers"
   }
 }

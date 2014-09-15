@@ -17,6 +17,16 @@
     "paths": [],
     "url": "http://bourbon.io/"
   },
+  "compass-mixins": {
+    "fingerprint": "compass-mixins",
+    "imports": [
+      "compass-mixins"
+    ],
+    "paths": [
+      "compass-mixins/lib"  
+    ],
+    "url": "https://github.com/Igosuki/compass-mixins"
+  },
   "Foundation": {
     "fingerprint": "(foundation|foundation\/.*)",
     "imports": [

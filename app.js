@@ -136,7 +136,7 @@ if (cluster.isMaster) {
     res.json({
       css: css,
       dependencies: {
-        'libsass': '2.0.0'
+        'libsass': '3.0'
       },
       time: time //.run().times.elapsed
     });

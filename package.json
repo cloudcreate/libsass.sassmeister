@@ -12,6 +12,8 @@
   "dependencies": {
     "express": ">=3.4.4",
     "ejs": ">=0.8.4",
-    "node-sass": ">=0.7.0"
+    "node-sass": ">=0.7.0",
+    "body-parser": ">=1.4.3",
+    "newrelic": ">=1.3.2"
   }
 }
